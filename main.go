@@ -14,7 +14,7 @@ func main() {
 		return c.String(http.StatusOK, "Hi")
 	})
 
-	if err := e.StartAutoTLS(":9999"); err != nil {
+	if err := e.StartAutoTLS(":8080"); err != nil {
 		log.Fatalln(err.Error())
 	}
 	// if err := e.StartTLS(":9999", "server.cert", "server.key"); err != nil {
