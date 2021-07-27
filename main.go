@@ -1,6 +1,7 @@
 package main
 
 import (
+	"firebaseAuth/middleware"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -9,15 +10,15 @@ import (
 func main() {
 	e := echo.New()
 
+	auth := middleware.FirebaseAuthSetup()
+
+	e.Use(middleware.AuthMiddleware(auth))
+
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hi")
+		return c.JSON(http.StatusOK, map[string]interface{}{
+			"data": "Authorization",
+		})
 	})
 
 	e.Start(":8080")
-	// if err := e.StartAutoTLS(":9999"); err != nil {
-	// 	log.Fatalln(err.Error())
-	// }
-	// if err := e.StartTLS(":9999", "server.cert", "server.key"); err != nil {
-	// 	log.Fatalln(err.Error())
-	// }
 }
