@@ -1,1 +1,0 @@
-# go-ssl-certificate
